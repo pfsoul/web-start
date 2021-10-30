@@ -1,0 +1,21 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: web-start
+  datasource:
+    dynamic:
+      primary: master
+      strict: false
+      datasource:
+        master:
+          url: jdbc:mysql://localhost:3306/quick?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=UTC
+          username: root
+          password:
+
+  redis:
+    # Redis 单机实例
+    database: 0
+    host: localhost
+    port: 6379
+    password:

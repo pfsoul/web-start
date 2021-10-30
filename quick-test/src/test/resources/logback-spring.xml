@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <!--日志存储路径-->
+    <property name="LOG_HOME" value="logs" />
+
+    <property name="STANDARD_LOG_PATTERN" value="%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}|%p|%t|%c|%X{traceId}|%m%ex%n" />
+
+    <!--输出到控制台 ConsoleAppender-->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${STANDARD_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 输出 ERROR 日志到 error.log -->
+    <appender name="ERROR-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/error.log.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+            <maxFileSize>200MB</maxFileSize>
+            <!--按天轮转，保留 7 天-->
+            <maxHistory>7</maxHistory>
+            <!--最多存储 20 GB 的归档文件-->
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${STANDARD_LOG_PATTERN}</pattern>
+        </encoder>
+        <!-- 只处理 ERROR -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- 输出除 ERROR 以外的日志到 biz.log -->
+    <appender name="BIZ-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/biz.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/biz.log.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+            <maxFileSize>200MB</maxFileSize>
+            <maxHistory>7</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${STANDARD_LOG_PATTERN}</pattern>
+        </encoder>
+        <!--除 ERROR 外都处理-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>DENY</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+    </appender>
+
+
+    <!-- 异步输出 -->
+    <appender name ="ERROR-ASYNC-APPENDER" class= "ch.qos.logback.classic.AsyncAppender">
+        <!-- 不丢失日志。默认的，如果队列的80%已满，则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+        <discardingThreshold>0</discardingThreshold>
+        <!-- 更改默认的队列的深度，该值会影响性能。默认值为256 -->
+        <queueSize>1024</queueSize>
+        <appender-ref ref ="ERROR-APPENDER"/>
+    </appender>
+    <appender name ="BIZ-ASYNC-APPENDER" class= "ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>1024</queueSize>
+        <appender-ref ref ="BIZ-APPENDER"/>
+    </appender>
+
+    <!-- 日志输出级别 -->
+    <root level="info">
+        <!-- 生产环境必需关闭 CONSOLE -->
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="ERROR-ASYNC-APPENDER"/>
+        <appender-ref ref="BIZ-ASYNC-APPENDER"/>
+    </root>
+
+</configuration>

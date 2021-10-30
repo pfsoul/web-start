@@ -1,0 +1,16 @@
+package ${package.Service};
+
+import ${package.Entity}.${entity};
+import ${package.Service}.base.BaseManager;
+
+/**
+ * <p>
+ * $!{table.comment} manager类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+public interface ${table.serviceName} extends BaseManager<${entity}> {
+
+}
