@@ -16,4 +16,9 @@ public class MessageManagerImpl extends BaseManagerImpl<MessageMapper, Message> 
     public Message create(Message message) {
         return this.saveAndReturn(message);
     }
+
+    @Override
+    public Message fetchById(Long id) {
+        return this.getById(id);
+    }
 }

@@ -2,7 +2,6 @@ package top.soulblack.quick.service;
 
 import top.soulblack.quick.common.cmd.CreateMsgCmd;
 import top.soulblack.quick.common.enity.Message;
-import top.soulblack.quick.common.vo.base.Result;
 
 /**
  * <p>
@@ -20,4 +19,11 @@ public interface MessageService {
      * @return 创建后返回实体
      */
     Message create(CreateMsgCmd msgCmd);
+
+    /**
+     * 根据ID获取对应消息
+     * @param id 主键id
+     * @return 返回对应实体
+     */
+    Message fetchById(Long id);
 }

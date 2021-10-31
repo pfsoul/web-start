@@ -1,7 +1,6 @@
 package top.soulblack.quick.manager;
 
 import top.soulblack.quick.common.enity.Message;
-import top.soulblack.quick.common.vo.base.Result;
 import top.soulblack.quick.manager.base.BaseManager;
 
 /**
@@ -20,4 +19,11 @@ public interface MessageManager extends BaseManager<Message> {
      * @return 创建并返回
      */
     Message create(Message message);
+
+    /**
+     * 根据ID获取消息
+     * @param id 主键id
+     * @return 返回消息
+     */
+    Message fetchById(Long id);
 }
