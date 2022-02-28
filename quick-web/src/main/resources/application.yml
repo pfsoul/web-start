@@ -40,6 +40,10 @@ feign:
 redisson:
   enable: true
 
+remote:
+  user:
+    domain: localhost:8080
+
 logging:
   level:
     top.soulblack.quick: debug
