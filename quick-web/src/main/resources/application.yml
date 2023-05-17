@@ -1,8 +1,13 @@
 server:
   port: 8080
 spring:
+  messages:
+    basename: i18n.message
   application:
     name: web-start
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   datasource:
     dynamic:
       primary: master

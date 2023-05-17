@@ -1,4 +1,4 @@
-package top.soulbllack.boot.code;
+package top.soulblack.boot.code;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;

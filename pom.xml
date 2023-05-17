@@ -38,6 +38,8 @@
         <feign-okhttp.version>11.5</feign-okhttp.version>
         <redisson.version>3.16.4</redisson.version>
         <mysql-connector.version>8.0.12</mysql-connector.version>
+        <disruptor.version>3.4.4</disruptor.version>
+        <apache.version>3.12.0</apache.version>
     </properties>
 
     <dependencyManagement>
@@ -127,6 +129,18 @@
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
                 <version>2.2.1.RELEASE</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.lmax</groupId>
+                <artifactId>disruptor</artifactId>
+                <version>${disruptor.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${apache.version}</version>
             </dependency>
 
         </dependencies>

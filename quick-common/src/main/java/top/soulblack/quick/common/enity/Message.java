@@ -1,13 +1,10 @@
 package top.soulblack.quick.common.enity;
 
-import top.soulblack.quick.common.enity.base.BaseModel;
 import com.baomidou.mybatisplus.annotation.TableName;
-
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.experimental.Accessors;
-
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import top.soulblack.quick.common.enity.base.BaseModel;
 
 /**
  * <p>
